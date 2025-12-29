@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "priority": 1,
+        "action": {
+            "type": "redirect",
+            "redirect": {
+                "transform": {
+                    "queryTransform": {
+                        "addOrReplaceParams": [
+                            {
+                                "key": "tag",
+                                "value": "gioxx-21"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "condition": {
+            "regexFilter": "^https?://([a-z0-9-]+\\.)*amazon\\.it/.*",
+            "excludedRegexFilter": "^https?://([a-z0-9-]+\\.)*amazon\\.it/(ap/|checkout/|gp/buy/|gp/sign-in).*",
+            "resourceTypes": [
+                "main_frame",
+                "sub_frame"
+            ]
+        }
+    }
+]
