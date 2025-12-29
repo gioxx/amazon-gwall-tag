@@ -34,3 +34,49 @@ jobs:
           files: dist/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # publish_chrome:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'release' && secrets.EXTENSION_ID != '' && secrets.CLIENT_ID != '' && secrets.CLIENT_SECRET != '' && secrets.REFRESH_TOKEN != ''
+  #   steps:
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: amazon-gwall-tag-packages
+  #         path: dist
+
+  #     - name: Upload to Chrome Web Store
+  #       uses: mnao305/chrome-extension-upload-action@v1
+  #       with:
+  #         extension-id: ${{ secrets.EXTENSION_ID }}
+  #         client-id: ${{ secrets.CLIENT_ID }}
+  #         client-secret: ${{ secrets.CLIENT_SECRET }}
+  #         refresh-token: ${{ secrets.REFRESH_TOKEN }}
+  #         file-name: dist/amazon-gwall-tag-chrome.zip
+  #         publish: true
+
+  # publish_firefox:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'release' && secrets.WEB_EXT_API_KEY != '' && secrets.WEB_EXT_API_SECRET != ''
+  #   steps:
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: amazon-gwall-tag-packages
+  #         path: dist
+
+  #     - name: Set up Node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: "20"
+
+  #     - name: Prepare Firefox package
+  #       run: unzip dist/amazon-gwall-tag-firefox.zip -d dist/firefox-upload
+
+  #     - name: Sign and upload to AMO
+  #       run: npx --yes web-ext sign --source-dir dist/firefox-upload --artifacts-dir dist --channel listed
+  #       env:
+  #         WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+  #         WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
